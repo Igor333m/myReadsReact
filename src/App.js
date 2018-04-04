@@ -27,7 +27,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Search />
-        <Bookshelf />
+        <Bookshelf books={this.state.books}/>
       </div>
     )
   }
