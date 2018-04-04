@@ -1,4 +1,5 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Bookshelf from './Bookshelf'
 import Search from './Search'
@@ -19,15 +20,21 @@ class BooksApp extends React.Component {
     BooksAPI.getAll().then((books) => {
       this.setState({books})
     })
-
   }
 
   render() {
     console.log(this.state.books)
     return (
       <div className="app">
-        <Search />
-        <Bookshelf books={this.state.books}/>
+        <Route exact path="/" render={() => (
+          <Bookshelf
+            // Passing a list of props into ListContacts component
+            books={this.state.books}
+          />
+        )}/>
+        <Route path="/search" render={ ({history}) => (
+          <Search />
+        )}/>
       </div>
     )
   }
