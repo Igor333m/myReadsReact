@@ -36,7 +36,7 @@ class BooksApp extends React.Component {
       if (book.id === bookSelected.id) {
         book.shelf = value
         this.setState(state => {
-          return
+          return undefined
         })
         }
       }
