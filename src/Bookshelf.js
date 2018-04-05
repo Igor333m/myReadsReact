@@ -5,10 +5,24 @@ import { Link } from 'react-router-dom'
 class Bookshelf extends Component {
 
 	static PropTypes = {
-		books: PropTypes.array.isRequired
 		books: PropTypes.array.isRequired, 
 		onUpdateBook:PropTypes.object.isRequired
 	}
+	/**
+	* @description Collect book object and value from dropdown menu (currentlyReading, wantToRead, read)
+	* @param {object} Book - Selected book object
+	* @param event 
+	*/
+	handleChange = (book, event) => {
+		event.preventDefault()
+		//const values = serializeForm(e.target, {hash: true})
+		// if (this.props.onUpdateBook) {
+		// 	this.props.onUpdateBook(values)
+		// }
+		console.log(event.target.value)
+		console.log(book)
+	}
+
 
 	render() {
 
@@ -32,7 +46,7 @@ class Bookshelf extends Component {
 	                          <div className="book-top">
 	                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
 	                            <div className="book-shelf-changer">
-	                              <select>
+	                              <select onChange={ (e) => this.handleChange(book, e)}>
 	                                <option value="none" disabled>Move to...</option>
 	                                <option value="currentlyReading">Currently Reading</option>
 	                                <option value="wantToRead">Want to Read</option>
