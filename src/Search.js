@@ -8,17 +8,36 @@ class Search extends Component {
     query: []
   }
 
+  /**
+  * @description Returns a Promise which resolves to a JSON object containing a collection of a maximum of 20 book objects.
+  * @param {string} query - Query from search bar
+  * @returns {array} 
+  */
   searchBook(query) {
-    BooksAPI.search(query).then(books => {
-      this.setState({ query: books })
-    })
+    console.log(query)
+    if (query) {
+      BooksAPI.search(query).then(books => {
+        this.setState({ query: books })
+        console.log(typeof this.state.query)
+      }).catch( (reason) => {
+        console.log(`Handle rejected promise ${reason} here.`)
+        this.clearQuery()
+      })
+    } else {
+      this.clearQuery()
+    }
+    
   }
 
   clearQuery = () => {
-    this.setState({ query: "" })
+    this.setState({ query: [] })
   }
 
   render() {
+    
+    // Holds search query
+    let showBooks
+    
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -32,7 +51,12 @@ class Search extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input type="text" placeholder="Search by title or author"/>
+            <input type="text"
+            autoFocus
+            placeholder="Search by title or author"
+            value={showBooks}
+            onChange={(event) => this.searchBook(event.target.value)}
+            />
 
           </div>
         </div>
