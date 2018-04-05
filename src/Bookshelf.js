@@ -8,6 +8,7 @@ class Bookshelf extends Component {
 		books: PropTypes.array.isRequired, 
 		onUpdateBook:PropTypes.object.isRequired
 	}
+	
 	/**
 	* @description Collect book object and value from dropdown menu (currentlyReading, wantToRead, read)
 	* @param {object} Book - Selected book object

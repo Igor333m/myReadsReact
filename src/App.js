@@ -16,17 +16,25 @@ class BooksApp extends React.Component {
     books: []
   }
 
+  /**
+  * @description BooksAPI.getAll() returns collection of book objects currently in the bookshelves
+  */
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
+      console.log(books)
       this.setState({books})
     })
   }
 
+  /**
+  * @description Updates selected book shelf
+  * @param {object} Book - Selected book object
+  * @param Selected shelf
+  */
   updateBook(bookSelected, value) {
     this.state.books.filter((book) => {
       if (book.id === bookSelected.id) {
         book.shelf = value
-        console.log(bookSelected)
         this.setState(state => {
           return
         })
@@ -35,10 +43,7 @@ class BooksApp extends React.Component {
     )
   }
 
-  componentDidUpdate() {}
-
   render() {
-    console.log(this.state.books)
     return (
       <div className="app">
         <Route exact path="/" render={() => (
