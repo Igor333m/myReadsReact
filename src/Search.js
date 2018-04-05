@@ -14,7 +14,6 @@ class Search extends Component {
   * @returns {array} 
   */
   searchBook(query) {
-    console.log(query)
     if (query) {
       BooksAPI.search(query).then(books => {
         this.setState({ query: books })
@@ -28,7 +27,9 @@ class Search extends Component {
     }
     
   }
-
+  /**
+  * @description Sets query to empty state
+  */
   clearQuery = () => {
     this.setState({ query: [] })
   }

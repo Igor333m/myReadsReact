@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 
 class Bookshelf extends Component {
 
+	// Typechecking with PropTypes
 	static PropTypes = {
 		books: PropTypes.array.isRequired, 
 		onUpdateBook:PropTypes.object.isRequired
 	}
-	
+
 	/**
 	* @description Collect book object and value from dropdown menu (currentlyReading, wantToRead, read)
 	* @param {object} Book - Selected book object
