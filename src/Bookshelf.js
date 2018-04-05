@@ -6,6 +6,8 @@ class Bookshelf extends Component {
 
 	static PropTypes = {
 		books: PropTypes.array.isRequired
+		books: PropTypes.array.isRequired, 
+		onUpdateBook:PropTypes.object.isRequired
 	}
 
 	render() {

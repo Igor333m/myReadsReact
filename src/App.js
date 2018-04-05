@@ -22,6 +22,12 @@ class BooksApp extends React.Component {
     })
   }
 
+  updateBook(book) {
+    BooksAPI.update(book, book.shelf).then(
+      console.log(book, book.shelf)
+    )
+  }
+
   render() {
     console.log(this.state.books)
     return (
@@ -30,6 +36,9 @@ class BooksApp extends React.Component {
           <Bookshelf
             // Passing a list of props into ListContacts component
             books={this.state.books}
+            onUpdateBook={(book) => {
+              this.updateBook(book)
+            }}
           />
         )}/>
         <Route path="/search" render={ ({history}) => (
