@@ -15,12 +15,8 @@ class Bookshelf extends Component {
 	*/
 	handleChange = (book, event) => {
 		event.preventDefault()
-		//const values = serializeForm(e.target, {hash: true})
-		// if (this.props.onUpdateBook) {
-		// 	this.props.onUpdateBook(values)
-		// }
-		console.log(event.target.value)
-		console.log(book)
+
+		this.props.onUpdateBook(book, event.target.value)
 	}
 
 

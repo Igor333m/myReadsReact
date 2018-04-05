@@ -22,11 +22,20 @@ class BooksApp extends React.Component {
     })
   }
 
-  updateBook(book) {
-    BooksAPI.update(book, book.shelf).then(
-      console.log(book, book.shelf)
+  updateBook(bookSelected, value) {
+    this.state.books.filter((book) => {
+      if (book.id === bookSelected.id) {
+        book.shelf = value
+        console.log(bookSelected)
+        this.setState(state => {
+          return
+        })
+        }
+      }
     )
   }
+
+  componentDidUpdate() {}
 
   render() {
     console.log(this.state.books)
@@ -36,8 +45,8 @@ class BooksApp extends React.Component {
           <Bookshelf
             // Passing a list of props into ListContacts component
             books={this.state.books}
-            onUpdateBook={(book) => {
-              this.updateBook(book)
+            onUpdateBook={(book, value) => {
+              this.updateBook(book, value)
             }}
           />
         )}/>
