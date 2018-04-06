@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import { Link  } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
+import PropTypes from 'prop-types'
 
 class Search extends Component {
+
+  static PropTypes = {
+    onUpdateBook:PropTypes.object.isRequired
+  }
 
   state = {
     query: []
@@ -17,7 +22,6 @@ class Search extends Component {
     if (query) {
       BooksAPI.search(query).then(books => {
         this.setState({ query: books })
-        console.log(typeof this.state.query)
       }).catch( (reason) => {
         console.log(`Handle rejected promise ${reason} here.`)
         this.clearQuery()
@@ -25,13 +29,27 @@ class Search extends Component {
     } else {
       this.clearQuery()
     }
-    
   }
+
   /**
   * @description Sets query to empty state
   */
   clearQuery = () => {
     this.setState({ query: [] })
+  }
+
+  /**
+  * @description Collect book object and value from dropdown menu (currentlyReading, wantToRead, read)
+  * @param {object} Book - Selected book object
+  * @param event 
+  */
+  handleChange = (book, event) => {
+    event.preventDefault()
+    const b = book
+    b.shelf = event.target.value
+    console.log("Search / handleChange")
+    console.log(b)
+    this.props.onAddNewBook(b)
   }
 
   render() {

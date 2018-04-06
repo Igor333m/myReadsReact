@@ -31,15 +31,25 @@ class BooksApp extends React.Component {
   * @param Selected shelf
   */
   updateBook(bookSelected, value) {
+    console.log("app")
     this.state.books.filter((book) => {
       if (book.id === bookSelected.id) {
         book.shelf = value
         this.setState(state => {
+          console.log("app")
           return undefined
         })
         }
       }
     )
+  }
+
+  addNewBook(bookSelected) {
+    console.log("app / addNewBook")
+    console.log(this.state.books)
+    console.log(bookSelected)
+    this.state.books.push(bookSelected)
+    console.log(this.state.books)
   }
 
   render() {
@@ -55,7 +65,11 @@ class BooksApp extends React.Component {
           />
         )}/>
         <Route path="/search" render={ ({history}) => (
-          <Search />
+          <Search
+            onAddNewBook={(book) => {
+              this.addNewBook(book)
+            }}
+          />
         )}/>
       </div>
     )
