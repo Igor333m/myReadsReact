@@ -44,6 +44,10 @@ class BooksApp extends React.Component {
     )
   }
 
+  /**
+  * @description Check if the book is alredy in state.books, if it's not, add the book from search to state.books
+  * @param {object} bookSelected - Selected book object
+  */
   addNewBook(bookSelected) {
     console.log("app / addNewBook")
     console.log(this.state.books)
@@ -56,10 +60,8 @@ class BooksApp extends React.Component {
     })
     if (!comparedBooks) {
       this.state.books.push(bookSelected)
-    }
-    
+    }    
     console.log(this.state.books)
-    
   }
 
   render() {
