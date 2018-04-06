@@ -48,8 +48,18 @@ class BooksApp extends React.Component {
     console.log("app / addNewBook")
     console.log(this.state.books)
     console.log(bookSelected)
-    this.state.books.push(bookSelected)
+    let comparedBooks = false
+    this.state.books.map(book => {
+      if (book.id === bookSelected.id ) {
+        comparedBooks = true
+      }
+    })
+    if (!comparedBooks) {
+      this.state.books.push(bookSelected)
+    }
+    
     console.log(this.state.books)
+    
   }
 
   render() {
