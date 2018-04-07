@@ -7,7 +7,8 @@ class Bookshelf extends Component {
 	// Typechecking with PropTypes
 	static PropTypes = {
 		books: PropTypes.array.isRequired, 
-		onUpdateBook:PropTypes.object.isRequired
+		onUpdateBook: PropTypes.object.isRequired,
+		onRemoveBook: PropTypes.object.isRequired
 	}
 
 	/**
@@ -17,8 +18,11 @@ class Bookshelf extends Component {
 	*/
 	handleChange = (book, event) => {
 		event.preventDefault()
-
-		this.props.onUpdateBook(book, event.target.value)
+		if (event.target.value === "none") {
+			this.props.onRemoveBook(book)
+		}else {
+			this.props.onUpdateBook(book, event.target.value)
+		}
 	}
 
 

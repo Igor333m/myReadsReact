@@ -31,17 +31,23 @@ class BooksApp extends React.Component {
   * @param Selected shelf
   */
   updateBook(bookSelected, value) {
-    console.log("app")
+    console.log("app / updateBook")
     this.state.books.filter((book) => {
       if (book.id === bookSelected.id) {
         book.shelf = value
         this.setState(state => {
-          console.log("app")
           return undefined
+          
         })
-        }
       }
-    )
+    })
+  }
+
+  removeBook(bookToRemove) {
+    console.log("app / removeBook")
+    this.setState((state) => ({
+      books: state.books.filter( (book) => { book.id !== bookToRemove.id })
+    }))
   }
 
   /**
@@ -71,6 +77,9 @@ class BooksApp extends React.Component {
           <Bookshelf
             // Passing a list of props into ListContacts component
             books={this.state.books}
+            onRemoveBook={(book) => {
+              this.removeBook(book)
+            }}
             onUpdateBook={(book, value) => {
               this.updateBook(book, value)
             }}

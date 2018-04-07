@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 class Search extends Component {
 
   static PropTypes = {
-    onUpdateBook:PropTypes.object.isRequired
+    onAddNewBook:PropTypes.object.isRequired
   }
 
   state = {
