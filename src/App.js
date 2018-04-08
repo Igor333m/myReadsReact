@@ -7,12 +7,6 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
-    /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
-     */
     books: []
   }
 
@@ -34,7 +28,9 @@ class BooksApp extends React.Component {
     console.log("app / updateBook")
     this.state.books.filter((book) => {
       if (book.id === bookSelected.id) {
+        // Update book shelf value in database
         BooksAPI.update(book, value).then()
+        // Set new shelf value and send book to that shelf
         book.shelf = value
         this.setState(state => {
           return undefined
@@ -44,17 +40,21 @@ class BooksApp extends React.Component {
     })
   }
 
-  updateBookApi(book, value) {
-    
+  /**
+  * @description Updates Dropdown menu none removes selected book from the shelf and from state.books array
+  * @param {object} Book - Selected book object to remove
+  */
+  removeBook(bookToRemove) {
+    console.log("app / removeBook")
+    // Remove book from state.book array
+    const i = this.state.books.indexOf(bookToRemove)
+    this.state.books.splice(i, 1)
+    // Update book shelf value to none in database
+    BooksAPI.update(bookToRemove, "none").then()
+    // Remove book from the shelf
+    bookToRemove.shelf = "none"
+    this.setState(state => {return undefined})
   }
-
-
-  // removeBook(bookToRemove) {
-  //   console.log("app / removeBook")
-  //   this.setState((state) => ({
-  //     books: state.books.filter( (book) => { book.id !== bookToRemove.id })
-  //   }))
-  // }
 
   /**
   * @description Check if the book is alredy in state.books, if it's not, add the book from search to state.books
@@ -88,7 +88,6 @@ class BooksApp extends React.Component {
             }}
             onUpdateBook={(book, value) => {
               this.updateBook(book, value)
-              this.updateBookApi(book, value)
             }}
           />
         )}/>
