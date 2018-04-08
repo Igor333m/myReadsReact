@@ -30,25 +30,27 @@ class BooksApp extends React.Component {
   * @param {object} Book - Selected book object
   * @param Selected shelf
   */
-  updateBook(bookSelected, value) {
-    console.log("app / updateBook")
-    this.state.books.filter((book) => {
-      if (book.id === bookSelected.id) {
-        book.shelf = value
-        this.setState(state => {
-          return undefined
-          
-        })
-      }
-    })
-  }
+  // updateBook(bookSelected, value) {
+  //   console.log("app / updateBook")
+  //   this.state.books.filter((book) => {
+  //     if (book.id === bookSelected.id) {
+  //       book.shelf = value
+  //       this.setState(state => {
+  //         return undefined
 
-  removeBook(bookToRemove) {
-    console.log("app / removeBook")
-    this.setState((state) => ({
-      books: state.books.filter( (book) => { book.id !== bookToRemove.id })
-    }))
-  }
+  //       })
+  //     }
+  //   })
+  // }
+  updateBook(book, value).then({})
+
+
+  // removeBook(bookToRemove) {
+  //   console.log("app / removeBook")
+  //   this.setState((state) => ({
+  //     books: state.books.filter( (book) => { book.id !== bookToRemove.id })
+  //   }))
+  // }
 
   /**
   * @description Check if the book is alredy in state.books, if it's not, add the book from search to state.books
