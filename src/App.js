@@ -30,19 +30,23 @@ class BooksApp extends React.Component {
   * @param {object} Book - Selected book object
   * @param Selected shelf
   */
-  // updateBook(bookSelected, value) {
-  //   console.log("app / updateBook")
-  //   this.state.books.filter((book) => {
-  //     if (book.id === bookSelected.id) {
-  //       book.shelf = value
-  //       this.setState(state => {
-  //         return undefined
+  updateBook(bookSelected, value) {
+    console.log("app / updateBook")
+    this.state.books.filter((book) => {
+      if (book.id === bookSelected.id) {
+        BooksAPI.update(book, value).then()
+        book.shelf = value
+        this.setState(state => {
+          return undefined
 
-  //       })
-  //     }
-  //   })
-  // }
-  updateBook(book, value).then({})
+        })
+      }
+    })
+  }
+
+  updateBookApi(book, value) {
+    
+  }
 
 
   // removeBook(bookToRemove) {
@@ -84,6 +88,7 @@ class BooksApp extends React.Component {
             }}
             onUpdateBook={(book, value) => {
               this.updateBook(book, value)
+              this.updateBookApi(book, value)
             }}
           />
         )}/>
