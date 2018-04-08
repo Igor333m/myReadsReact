@@ -18,11 +18,9 @@ class Bookshelf extends Component {
 	*/
 	handleChange = (book, event) => {
 		event.preventDefault()
-		if (event.target.value === "none") {
-			this.props.onRemoveBook(book)
-		}else {
+		
 			this.props.onUpdateBook(book, event.target.value)
-		}
+
 	}
 
 
