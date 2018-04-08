@@ -46,6 +46,7 @@ class BooksApp extends React.Component {
   */
   removeBook(bookToRemove) {
     console.log("app / removeBook")
+    console.log(this.state.books)
     // Remove book from state.book array
     const i = this.state.books.indexOf(bookToRemove)
     this.state.books.splice(i, 1)
@@ -53,6 +54,7 @@ class BooksApp extends React.Component {
     BooksAPI.update(bookToRemove, "none").then()
     // Remove book from the shelf
     bookToRemove.shelf = "none"
+    console.log(this.state.books)
     this.setState(state => {return undefined})
   }
 
@@ -60,7 +62,7 @@ class BooksApp extends React.Component {
   * @description Check if the book is alredy in state.books, if it's not, add the book from search to state.books
   * @param {object} bookSelected - Selected book object
   */
-  addNewBook(bookSelected) {
+  addNewBook(bookSelected, shelf) {
     console.log("app / addNewBook")
     console.log(this.state.books)
     console.log(bookSelected)
@@ -68,12 +70,15 @@ class BooksApp extends React.Component {
     this.state.books.map(book => {
       if (book.id === bookSelected.id ) {
         comparedBooks = true
+        book.shelf = shelf
       }
     })
     if (!comparedBooks) {
+      bookSelected.shelf = shelf
       this.state.books.push(bookSelected)
     }    
     console.log(this.state.books)
+
   }
 
   render() {
@@ -93,8 +98,8 @@ class BooksApp extends React.Component {
         )}/>
         <Route path="/search" render={ ({history}) => (
           <Search
-            onAddNewBook={(book) => {
-              this.addNewBook(book)
+            onAddNewBook={(book, shelf) => {
+              this.addNewBook(book, shelf)
             }}
           />
         )}/>

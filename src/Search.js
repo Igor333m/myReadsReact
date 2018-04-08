@@ -45,11 +45,11 @@ class Search extends Component {
   */
   handleChange = (book, event) => {
     event.preventDefault()
-    const b = book
-    b.shelf = event.target.value
     console.log("Search / handleChange")
-    console.log(b)
-    this.props.onAddNewBook(b)
+    console.log(event.target.value)
+    const e = event.target.value
+    
+    this.props.onAddNewBook(book, e)
   }
 
   render() {
