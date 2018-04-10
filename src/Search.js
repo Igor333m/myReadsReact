@@ -6,7 +6,8 @@ import PropTypes from 'prop-types'
 class Search extends Component {
 
   static PropTypes = {
-    onAddNewBook:PropTypes.object.isRequired
+    onAddNewBook:PropTypes.object.isRequired,
+    listOfShelfBooks: PropTypes.array.isRequired
   }
 
   state = {
@@ -16,7 +17,7 @@ class Search extends Component {
   /**
   * @description Returns a Promise which resolves to a JSON object containing a collection of a maximum of 20 book objects.
   * @param {string} query - Query from search bar
-  * @returns {array} 
+  * @returns {array} of books
   */
   searchBook(query) {
     if (query) {
