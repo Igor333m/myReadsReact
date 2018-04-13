@@ -98,7 +98,7 @@ class BooksApp extends React.Component {
         )}/>
         <Route path="/search" render={ ({history}) => (
           <Search
-            listOfShelfBooks={this.state.books}
+            books={this.state.books}
             onAddNewBook={(book, shelf) => {
               this.addNewBook(book, shelf)
             }}

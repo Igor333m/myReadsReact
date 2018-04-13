@@ -6,12 +6,13 @@ import PropTypes from 'prop-types'
 class Search extends Component {
 
   static PropTypes = {
-    onAddNewBook:PropTypes.object.isRequired,
-    listOfShelfBooks: PropTypes.array.isRequired
+    books:PropTypes.array.isRequired,
+    onAddNewBook:PropTypes.object.isRequired
   }
 
   state = {
-    query: []
+    query: [],
+    books: this.props.books
   }
 
   /**
@@ -22,7 +23,25 @@ class Search extends Component {
   searchBook(query) {
     if (query) {
       BooksAPI.search(query).then(books => {
-        this.setState({ query: books })
+
+        this.state.books.map(book => {
+          books.map(qBook => {
+            if (!qBook.shelf) {
+              qBook.shelf = "none"
+            }
+            if (book.id === qBook.id) {
+              console.log('qBook.shelf = book.shelf')
+              
+
+              qBook.shelf = book.shelf
+              
+            }
+          })
+        })
+
+        this.setState((prevState) => {
+      return { query: books }
+    })
       }).catch( (reason) => {
         console.log(`Handle rejected promise ${reason} here.`)
         this.clearQuery()
@@ -30,13 +49,17 @@ class Search extends Component {
     } else {
       this.clearQuery()
     }
+
+    
   }
 
   /**
   * @description Sets query to empty state
   */
   clearQuery = () => {
-    this.setState({ query: []})
+    this.setState((prevState) => {
+      return { query: [] }
+    })
   }
 
   /**
@@ -49,7 +72,6 @@ class Search extends Component {
     console.log("Search / handleChange")
     console.log(event.target.value)
     const e = event.target.value
-    
     this.props.onAddNewBook(book, e)
   }
 
@@ -91,7 +113,7 @@ class Search extends Component {
                         <div className="book-top">
                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                           <div className="book-shelf-changer">
-                            <select value={ book.shelf ? book.shelf : "none" } onChange={ (e) => this.handleChange(book, e)}>
+                            <select value={ book.shelf } onChange={ (e) => this.handleChange(book, e)}>
                               <option value="moveTo" disabled>Move to...</option>
                               <option value="currentlyReading">Currently Reading</option>
                               <option value="wantToRead">Want to Read</option>
