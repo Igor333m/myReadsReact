@@ -25,9 +25,10 @@ class Search extends Component {
       BooksAPI.search(query).then(books => {
         this.state.books.map(book => {
           books.map(qBook => {
+             //console.log(qBook.imageLinks.thumbnail)
             // Set all shelfs to none
             if (!qBook.shelf) {
-              qBook.shelf = "none"
+              qBook.shelf = 'none'
             }
             // Check if book is on the shelf 
             if (book.id === qBook.id) {
@@ -41,7 +42,7 @@ class Search extends Component {
         })
       }).catch( (reason) => {
         console.log(`Handle rejected promise ${reason} here.`)
-        this.clearQuery()
+        //this.clearQuery()
       })
     } else {
       this.clearQuery()
@@ -64,7 +65,7 @@ class Search extends Component {
   */
   handleChange = (book, event) => {
     event.preventDefault()
-    console.log("Search / handleChange")
+    console.log('Search / handleChange')
     console.log(event.target.value)
     const e = event.target.value
     this.props.onAddNewBook(book, e)
