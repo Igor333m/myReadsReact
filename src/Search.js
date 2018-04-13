@@ -23,34 +23,29 @@ class Search extends Component {
   searchBook(query) {
     if (query) {
       BooksAPI.search(query).then(books => {
-
         this.state.books.map(book => {
           books.map(qBook => {
+            // Set all shelfs to none
             if (!qBook.shelf) {
               qBook.shelf = "none"
             }
+            // Check if book is on the shelf 
             if (book.id === qBook.id) {
               console.log('qBook.shelf = book.shelf')
-              
-
               qBook.shelf = book.shelf
-              
             }
           })
         })
-
         this.setState((prevState) => {
-      return { query: books }
-    })
+          return { query: books }
+        })
       }).catch( (reason) => {
         console.log(`Handle rejected promise ${reason} here.`)
         this.clearQuery()
       })
     } else {
       this.clearQuery()
-    }
-
-    
+    }    
   }
 
   /**
@@ -106,29 +101,29 @@ class Search extends Component {
           <ol className="books-grid"></ol>
         </div>
         <div className="bookshelf-books">
-                <ol className="books-grid">
-                  {this.state.query.map((book) => (
-                    <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
-                          <div className="book-shelf-changer">
-                            <select value={ book.shelf } onChange={ (e) => this.handleChange(book, e)}>
-                              <option value="moveTo" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="book-title">{ book.title }</div>
-                        <div className="book-authors">{ book.authors }</div>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
+          <ol className="books-grid">
+            {this.state.query.map((book) => (
+              <li key={book.id}>
+                <div className="book">
+                  <div className="book-top">
+                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+                    <div className="book-shelf-changer">
+                      <select value={ book.shelf } onChange={ (e) => this.handleChange(book, e)}>
+                        <option value="moveTo" disabled>Move to...</option>
+                        <option value="currentlyReading">Currently Reading</option>
+                        <option value="wantToRead">Want to Read</option>
+                        <option value="read">Read</option>
+                        <option value="none">None</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="book-title">{ book.title }</div>
+                  <div className="book-authors">{ book.authors }</div>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     )
   }

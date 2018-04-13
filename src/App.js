@@ -78,7 +78,6 @@ class BooksApp extends React.Component {
       this.state.books.push(bookSelected)
     }    
     console.log(this.state.books)
-
   }
 
   render() {

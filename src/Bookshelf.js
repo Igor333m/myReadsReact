@@ -24,8 +24,7 @@ class Bookshelf extends Component {
 			this.props.onUpdateBook(book, event.target.value)
 		}
 	}
-
-
+	
 	render() {
 
 		let currentlyReading = this.props.books.filter(book => book.shelf === "currentlyReading")
