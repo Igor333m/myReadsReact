@@ -35,6 +35,10 @@ class Search extends Component {
               qBook.imageLinks = {}
               qBook.imageLinks.thumbnail = 'http://via.placeholder.com/128x193'
             }
+            if (!qBook.authors) {
+              console.log('author')
+              qBook.authors = "Author unknown"
+            }
             // Check if book is on the shelf 
             if (book.id === qBook.id) {
               console.log('qBook.shelf = book.shelf')
