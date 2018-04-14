@@ -25,10 +25,14 @@ class Search extends Component {
       BooksAPI.search(query).then(books => {
         this.state.books.map(book => {
           books.map(qBook => {
-             //console.log(qBook.imageLinks.thumbnail)
             // Set all shelfs to none
             if (!qBook.shelf) {
               qBook.shelf = 'none'
+            }
+            if ( !qBook.imageLinks) {
+              console.log('thumbnail')
+              qBook.imageLinks = {}
+              qBook.imageLinks.thumbnail = 'http://via.placeholder.com/128x193'
             }
             // Check if book is on the shelf 
             if (book.id === qBook.id) {
