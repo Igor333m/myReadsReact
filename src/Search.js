@@ -29,6 +29,7 @@ class Search extends Component {
             if (!qBook.shelf) {
               qBook.shelf = 'none'
             }
+            // Sets thumbnails for books without it
             if ( !qBook.imageLinks) {
               console.log('thumbnail')
               qBook.imageLinks = {}
