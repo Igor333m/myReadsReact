@@ -68,12 +68,11 @@ class Search extends Component {
     })
   }
 
+  /**
+  * @description If query is not empty, renders all books from the query
+  */
   renderContent() {
-    console.log(this.state.query.length)
-    console.log(this.state.query)
     if (this.state.query.length === 0) {
-      console.log('Empty everyting')
-
       return <div></div>
     }else{
       return [ this.state.query.map((book) => (
