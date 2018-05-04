@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link  } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import PropTypes from 'prop-types'
+import {DebounceInput} from 'react-debounce-input'
 
 class Search extends Component {
 
@@ -67,6 +68,37 @@ class Search extends Component {
     })
   }
 
+  renderContent() {
+    console.log(this.state.query.length)
+    console.log(this.state.query)
+    if (this.state.query.length === 0) {
+      console.log('Empty everyting')
+
+      return <div></div>
+    }else{
+      return [ this.state.query.map((book) => (
+      <li key={book.id}>
+        <div className="book">
+          <div className="book-top">
+            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+            <div className="book-shelf-changer">
+              <select value={ book.shelf } onChange={ (e) => this.handleChange(book, e)}>
+                <option value="moveTo" disabled>Move to...</option>
+                <option value="currentlyReading">Currently Reading</option>
+                <option value="wantToRead">Want to Read</option>
+                <option value="read">Read</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+          </div>
+          <div className="book-title">{ book.title }</div>
+          <div className="book-authors">{ book.authors }</div>
+        </div>
+      </li>
+    ))] 
+    }
+  }
+
   /**
   * @description Collect book object and value from dropdown menu (currentlyReading, wantToRead, read)
   * @param {object} Book - Selected book object
@@ -98,7 +130,9 @@ class Search extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input type="text"
+            <DebounceInput
+            minLength={2}
+            debounceTimeout={300}
             autoFocus
             placeholder="Search by title or author"
             value={showBooks}
@@ -112,26 +146,7 @@ class Search extends Component {
         </div>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {this.state.query.map((book) => (
-              <li key={book.id}>
-                <div className="book">
-                  <div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
-                    <div className="book-shelf-changer">
-                      <select value={ book.shelf } onChange={ (e) => this.handleChange(book, e)}>
-                        <option value="moveTo" disabled>Move to...</option>
-                        <option value="currentlyReading">Currently Reading</option>
-                        <option value="wantToRead">Want to Read</option>
-                        <option value="read">Read</option>
-                        <option value="none">None</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="book-title">{ book.title }</div>
-                  <div className="book-authors">{ book.authors }</div>
-                </div>
-              </li>
-            ))}
+            {this.renderContent()}
           </ol>
         </div>
       </div>
