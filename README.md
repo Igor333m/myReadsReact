@@ -2,6 +2,10 @@
 
 This is a bookshelf app that allows you search for books, to add them on a shelf and categorize books you have read, are currently reading, or want to read.
 
+## Deployed app on Heroku
+
+https://myreadsreact.herokuapp.com/
+
 ## To install and launch
 
 * clone the this repository
