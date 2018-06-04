@@ -6,6 +6,11 @@ This is a bookshelf app that allows you search for books, to add them on a shelf
 
 https://myreadsreact.herokuapp.com/
 
+## Game preview
+
+![myReads Preview](images/myreads.png)
+
+
 ## To install and launch
 
 * clone the this repository
