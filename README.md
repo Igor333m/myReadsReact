@@ -8,7 +8,7 @@ https://myreadsreact.herokuapp.com/
 
 ## Game preview
 
-![myReads Preview](images/myreads.png)
+![myReads Preview](src/myreads.png)
 
 
 ## To install and launch
