@@ -13,7 +13,7 @@ https://myreadsreact.herokuapp.com/
 
 ## To install and launch
 
-* clone the this repository
+* clone the this repository `git clone https://github.com/Igor333m/myReadsReact.git`
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 
